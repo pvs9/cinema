@@ -14,7 +14,7 @@
                             </div>
                         @endif
 
-                        @if(count($sessions))
+                        @if(isset($sessions) && count($sessions))
                             @foreach($sessions as $session)
                                 <div class="card" style="width: 18rem;">
                                     <div class="card-body">
@@ -33,20 +33,27 @@
                             @endforeach
                         @endif
                         @if(isset($session) && isset($seats))
-                            <div class="card" style="width: 18rem;">
-                                <form method="POST" action="{{ route('ticket') }}" class="card-body">
-                                    @csrf
-                                    <h5 class="card-title">{{ $session->film->name }}</h5>
-                                    <p class="card-text"><strong>Сеанс:</strong> {{ \Carbon\Carbon::parse($session->date)->format('F j. H:i') }}</p>
-                                    <select name="seat" title="Выберите место" required>
-                                        @foreach($seats as $seat)
-                                            <option value="{{ $seat->id }}"> Ряд {{ $seat->row->number }}, Место {{ $seat->number }}, Цена: {{ $seat->price * $session->coefficient }}</option>
-                                        @endforeach
-                                    </select>
-                                    <input type="hidden" name="session" value="{{ $session->id }}">
-                                    <button type="submit" class="btn btn-primary">Купить</button>
-                                </form>
-                            </div>
+                            @if(count($seats))
+                                <div class="card" style="width: 18rem;">
+                                    <form method="POST" action="{{ route('ticket') }}" class="card-body">
+                                        @csrf
+                                        <h5 class="card-title">{{ $session->film->name }}</h5>
+                                        <p class="card-text"><strong>Сеанс:</strong> {{ \Carbon\Carbon::parse($session->date)->format('F j. H:i') }}</p>
+                                        <select name="seat" title="Выберите место" required>
+                                            @foreach($seats as $seat)
+                                                <option value="{{ $seat->id }}"> Ряд {{ $seat->row->number }}, Место {{ $seat->number }}, Цена: {{ $seat->price * $session->coefficient }}</option>
+                                            @endforeach
+                                        </select>
+                                        <br/>
+                                        <input type="hidden" name="session" value="{{ $session->id }}">
+                                        <button type="submit" class="btn btn-primary">Купить</button>
+                                    </form>
+                                </div>
+                            @else
+                                <div class="alert alert-success" role="alert">
+                                    Билеты закончились
+                                </div>
+                            @endif
                         @endif
                     </div>
                 </div>
