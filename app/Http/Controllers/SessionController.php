@@ -11,6 +11,7 @@ class SessionController extends Controller
 	{
 		$sessions =  Session::where('date', '>=', Carbon::now())
 			->with('film', 'hall.cinema', 'tickets')
+			->orderBy('date', 'asc')
 			->get();
 
 		$available = $sessions->filter(function ($model) {
