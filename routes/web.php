@@ -15,4 +15,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/sessions', 'SessionController@get')->name('sessions');
+Route::get('/sessions/{id?}', 'SessionController@get')->name('sessions');
