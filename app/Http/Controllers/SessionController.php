@@ -43,4 +43,15 @@ class SessionController extends Controller
 			}
 		}
 	}
+
+	public function seats($id)
+	{
+		$session = Session::find($id);
+		if(!$session) return response('No session found', 404);
+		else {
+			return response()->json([
+				'seats' => $session->tickets()->count() - $session->hall->seats()->count()
+			]);
+		}
+	}
 }

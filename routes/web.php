@@ -21,4 +21,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/sessions/{id?}', 'SessionController@get')->name('sessions');
 
+Route::get('/sessions/{id}/seats', 'SessionController@seats')->name('sessions.seats');
+
 Route::post('/ticket', 'TicketController@buy')->name('ticket');
