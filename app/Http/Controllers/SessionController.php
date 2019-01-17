@@ -17,11 +17,10 @@ class SessionController extends Controller
 				->get();
 
 			$available = $sessions->filter(function ($model) {
-				print($model->tickets()->count());
 				return $model->tickets()->count() < $model->hall->seats()->count();
 			});
 
-			return $available;
+			return view('session', ['sessions' => $available]);
 		}
 		else {
 			$session = Session::with('film', 'hall.cinema', 'tickets')
@@ -40,7 +39,7 @@ class SessionController extends Controller
 					return true;
 				});
 
-				return $available_seats;
+				return view('session', ['session' => $session, 'seats' => $available_seats]);
 			}
 		}
 	}

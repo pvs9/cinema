@@ -44,7 +44,7 @@ class TicketController extends Controller
 			$ticket->save();
 
 			$request->session()->flash('status', 'You have successfully bought a ticket!');
-			return redirect()->back();
+			return redirect()->route('sessions');
 		}
 	}
 }

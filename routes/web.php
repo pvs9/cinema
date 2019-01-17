@@ -11,8 +11,14 @@
 |
 */
 
+Auth::routes();
+
 Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/home', 'HomeController@index')->name('home');
+
 Route::get('/sessions/{id?}', 'SessionController@get')->name('sessions');
+
+Route::post('/ticket', 'TicketController@buy')->name('ticket');
