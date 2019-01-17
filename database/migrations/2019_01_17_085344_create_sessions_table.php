@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreateSessionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,23 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('sessions', function (Blueprint $table) {
 			$table->engine = 'InnoDB';
 			$table->charset = 'utf8mb4';
 			$table->collation = 'utf8mb4_unicode_ci';
             $table->increments('id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('phone')->unique();
-			$table->unsignedInteger('age');
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->unsignedDecimal('coefficient');
+            $table->dateTime('date');
+            $table->unsignedInteger('hall_id');
+            $table->unsignedInteger('film_id');
+			$table->foreign('hall_id')
+				->references('id')
+				->on('halls')
+				->onDelete('cascade');
+			$table->foreign('film_id')
+				->references('id')
+				->on('films')
+				->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -36,6 +41,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('sessions');
     }
 }

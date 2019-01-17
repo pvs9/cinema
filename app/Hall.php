@@ -25,6 +25,14 @@ class Hall extends Model
 	];
 
 	/**
+	 * Get the cinema that owns the hall.
+	 */
+	public function cinema()
+	{
+		return $this->belongsTo('App\Cinema');
+	}
+
+	/**
 	 * Get rows for the hall.
 	 */
 	public function rows()
