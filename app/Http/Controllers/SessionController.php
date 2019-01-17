@@ -17,7 +17,6 @@ class SessionController extends Controller
 				->get();
 
 			$available = $sessions->filter(function ($model) {
-				print($model->tickets()->count());
 				return $model->tickets()->count() < $model->hall->seats()->count();
 			});
 

@@ -14,7 +14,7 @@
                             </div>
                         @endif
 
-                        @if (count($sessions))
+                        @if(count($sessions))
                             @foreach($sessions as $session)
                                 <div class="card" style="width: 18rem;">
                                     <div class="card-body">
@@ -32,7 +32,7 @@
                                 </div>
                             @endforeach
                         @endif
-                        @isset($session)
+                        @if(isset($session) && isset($seats))
                             <div class="card" style="width: 18rem;">
                                 <form method="POST" action="{{ route('ticket') }}" class="card-body">
                                     @csrf
@@ -47,7 +47,7 @@
                                     <button type="submit" class="btn btn-primary">Купить</button>
                                 </form>
                             </div>
-                        @endisset
+                        @endif
                     </div>
                 </div>
             </div>
