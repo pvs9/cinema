@@ -23,4 +23,28 @@ class Session extends Model
 	protected $dates = [
 		'date', 'created_at', 'updated_at',
 	];
+
+	/**
+	 * Get the tickets for the session.
+	 */
+	public function tickets()
+	{
+		return $this->hasMany('App\Ticket');
+	}
+
+	/**
+	 * Get the the hall that owns the session.
+	 */
+	public function hall()
+	{
+		return $this->belongsTo('App\Hall');
+	}
+
+	/**
+	 * Get the the film that owns the session.
+	 */
+	public function film()
+	{
+		return $this->belongsTo('App\Film');
+	}
 }

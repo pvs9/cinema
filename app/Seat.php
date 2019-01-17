@@ -23,4 +23,20 @@ class Seat extends Model
 	protected $dates = [
 		'created_at', 'updated_at',
 	];
+
+	/**
+	 * Get the the row that owns the seat.
+	 */
+	public function row()
+	{
+		return $this->belongsTo('App\Row');
+	}
+
+	/**
+	 * Get the the tickets for the seat.
+	 */
+	public function tickets()
+	{
+		return $this->hasMany('App\Ticket');
+	}
 }

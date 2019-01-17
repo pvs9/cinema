@@ -12,7 +12,7 @@ class Hall extends Model
 	 * @var array
 	 */
 	protected $fillable = [
-		'name', 'capacity',
+		'name',
 	];
 
 	/**
@@ -23,4 +23,28 @@ class Hall extends Model
 	protected $dates = [
 		'created_at', 'updated_at',
 	];
+
+	/**
+	 * Get rows for the hall.
+	 */
+	public function rows()
+	{
+		return $this->hasMany('App\Row');
+	}
+
+	/**
+	 * Get seats for the hall
+	 */
+	public function seats()
+	{
+		return $this->hasManyThrough('App\Seat', 'App\Row');
+	}
+
+	/**
+	 * Get sessions for the hall.
+	 */
+	public function sessions()
+	{
+		return $this->hasMany('App\Session');
+	}
 }

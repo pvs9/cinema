@@ -23,4 +23,20 @@ class Row extends Model
 	protected $dates = [
 		'created_at', 'updated_at',
 	];
+
+	/**
+	 * Get the hall that owns the row.
+	 */
+	public function hall()
+	{
+		return $this->belongsTo('App\Hall');
+	}
+
+	/**
+	 * Get seats for the row.
+	 */
+	public function seats()
+	{
+		return $this->hasMany('App\Seats');
+	}
 }

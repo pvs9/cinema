@@ -23,4 +23,12 @@ class Film extends Model
 	protected $dates = [
 		'created_at', 'updated_at',
 	];
+
+	/**
+	 * Get sessions for the film.
+	 */
+	public function sessions()
+	{
+		return $this->hasMany('App\Session');
+	}
 }

@@ -23,4 +23,20 @@ class Cinema extends Model
 	protected $dates = [
 		'created_at', 'updated_at',
 	];
+
+	/**
+	 * Get halls for the cinema.
+	 */
+	public function halls()
+	{
+		return $this->hasMany('App\Hall');
+	}
+
+	/**
+	 * Get sessions for the cinema.
+	 */
+	public function sessions()
+	{
+		return $this->hasManyThrough('App\Session', 'App\Hall');
+	}
 }
