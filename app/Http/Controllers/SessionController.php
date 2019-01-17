@@ -50,7 +50,7 @@ class SessionController extends Controller
 		if(!$session) return response('No session found', 404);
 		else {
 			return response()->json([
-				'seats' => $session->tickets()->count() - $session->hall->seats()->count()
+				'seats' => $session->hall->seats()->count() - $session->tickets()->count()
 			]);
 		}
 	}

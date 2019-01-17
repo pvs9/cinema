@@ -18,7 +18,7 @@ class SeatsTest extends TestCase
 		$this->seed();
 		$this->be(User::find(1));
 		$response = $this->get('/sessions/1/seats');
-		$this->assertEquals(200, $response->status())
-		$response->assertJsonStructure(['seats']);;
+		$this->assertEquals(200, $response->status());
+		$response->assertJsonStructure(['seats']);
 	}
 }
